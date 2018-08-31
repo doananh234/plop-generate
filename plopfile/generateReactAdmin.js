@@ -132,14 +132,7 @@ const prompts = [
   {
     type: 'recursive',
     name: 'props',
-    message: 'What is property Name?',
-    prompts: [
-      {
-        type: 'input',
-        name: 'propName',
-        message: 'What is property Name?'
-      }
-    ]
+    message: 'What is property Name?'
   }
 ];
 
@@ -178,15 +171,13 @@ function customAction(data) {
 
     modelForm +=
       (index !== 0 ? '\n    ' : '') +
-      `<RestFormInput source="${element.propName}" title="${
-        element.propName
-      }" />`;
+      `<RestFormInput source="${element}" title="${element}" />`;
     modelList +=
       (index !== 0 ? '\n    ' : '') +
-      `<Label source="${element.propName}" title="${element.propName}" />`;
+      `<Label source="${element}" title="${element}" />`;
     modelShow +=
       (index !== 0 ? '\n      ' : '') +
-      `<TextField source="${element.propName}" title="${element.propName}" />`;
+      `<TextField source="${element}" title="${element}" />`;
   });
 
   actions.push({
