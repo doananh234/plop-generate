@@ -1,0 +1,22 @@
+{
+  "name": "plopfile-generate",
+  "version": "1.0.20",
+  "description": "",
+  "author": {
+    "name": "anh",
+    "email": "doananh234@gmail.com"
+  },
+  "engines": {
+    "node": "8.11.3"
+  },
+  "main": "app",
+  "scripts": {},
+  "dependencies": {
+    "inquirer": "^6.1.0",
+    "inquirer-recursive": "^0.0.5",
+    "lodash": "^4.17.10",
+    "plop": "^2.0.0",
+    "pluralize": "^7.0.0",
+    "util": "^0.11.0"
+  }
+}
