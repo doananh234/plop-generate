@@ -25,69 +25,23 @@ function Prompt(question, rl, answers) {
 util.inherits(Prompt, Base);
 
 Prompt.prototype.askForLoop = function() {
-  var ui = inquirer
+  inquirer
     .prompt({
       default: '',
       type: 'input',
-      name: 'loop',
+      name: 'answer',
       message: this.opt.message || 'Would you like to loop ?'
     })
     .then(
       function(result) {
-        if (result.loop) {
-          this.askNestedQuestion();
+        if (result.answer !== '') {
+          this.responses.push(result.answer);
+          this.askForLoop();
         } else {
           this.done(this.responses);
         }
       }.bind(this)
     );
-};
-
-Prompt.prototype.askLoopForChild = function(result) {
-  var ui = inquirer
-    .prompt({
-      default: true,
-      type: 'confirm',
-      name: 'loop',
-      message: this.opt.message || 'Would you like to loop ?'
-    })
-    .then(
-      function(result2) {
-        if (result2.loop) {
-          this.askNestedQuestionForChild(result);
-        } else {
-          this.responses.push(result);
-          this.askNestedQuestion();
-          console.log(
-            '+++++++++++++++++++ End Input child props++++++++++++++++++++'
-          );
-        }
-      }.bind(this)
-    );
-};
-
-Prompt.prototype.askNestedQuestion = function() {
-  inquirer.prompt(this.opt.prompts).then(
-    function(result) {
-      if (result.type === 'object') {
-        result.childs = [];
-        this.index = 0;
-        this.askNestedQuestionForChild(result, this.index);
-        return;
-      }
-      this.responses.push(result);
-      this.askForLoop();
-    }.bind(this)
-  );
-};
-
-Prompt.prototype.askNestedQuestionForChild = function(result) {
-  inquirer.prompt(this.opt.prompts).then(
-    function(result1) {
-      result.childs.push(result1);
-      this.askLoopForChild(result);
-    }.bind(this)
-  );
 };
 
 Prompt.prototype._run = function(cb) {

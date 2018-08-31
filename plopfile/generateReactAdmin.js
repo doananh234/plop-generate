@@ -132,7 +132,7 @@ const prompts = [
   {
     type: 'recursive',
     name: 'props',
-    message: 'do you want input model props?',
+    message: 'What is property Name?',
     prompts: [
       {
         type: 'input',
@@ -158,7 +158,7 @@ module.exports = function(plop) {
   plop.setHelper('upperCase', txt => txt.toUpperCase());
   plop.setPartial('myTitlePartial', '{{upperCase name}}');
   plop.setHelper('pluralize', txt => pluralizeStr(txt));
-  plop.setPrompt('recursive', require('inquirer-recursive'));
+  plop.setPrompt('recursive', require('../promts/loopPromts'));
 
   plop.setGenerator('generate init react admin', configInit);
   plop.setGenerator('generate react admin view', {
