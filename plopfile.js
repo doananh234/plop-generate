@@ -4,6 +4,7 @@ const pluralize = require('pluralize');
 const generateRedux = require('./plopfile/generateRedux');
 const generateKoaModel = require('./plopfile/generateKoaModel');
 const generateReactAdmin = require('./plopfile/generateReactAdmin');
+const generateExpressModel = require('./plopfile/generateExpressModel');
 
 function upperCaseFirstChart(txt) {
   return txt.substring(0, 1).toUpperCase() + txt.substring(1);
@@ -24,5 +25,6 @@ module.exports = function(plop) {
 
   generateKoaModel(plop);
   generateReactAdmin(plop);
+  generateExpressModel(plop);
   plop.setGenerator('generate redux', generateRedux);
 };
