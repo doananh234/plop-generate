@@ -15,7 +15,7 @@ function pluralizeStr(txt) {
   return str.substring(0, 1).toLocaleLowerCase() + str.substring(1);
 }
 
-module.exports = function(plop) {
+module.exports = function(plop, config = {}) {
   // controller generator
   plop.setHelper('upperCaseFirstChart', txt => upperCaseFirstChart(txt));
   plop.setHelper('upperCase', txt => txt.toUpperCase());
@@ -23,8 +23,8 @@ module.exports = function(plop) {
   plop.setHelper('pluralize', txt => pluralize(txt));
   plop.setPrompt('recursive', require('inquirer-recursive'));
 
-  generateKoaModel(plop);
-  generateReactAdmin(plop);
-  generateExpressModel(plop);
+  generateKoaModel(plop, config);
+  generateReactAdmin.init(plop, config);
+  generateExpressModel.init(plop, config);
   plop.setGenerator('generate redux', generateRedux);
 };

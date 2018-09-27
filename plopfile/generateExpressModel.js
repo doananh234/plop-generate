@@ -1,5 +1,6 @@
 const fs = require('fs');
 const pluralize = require('pluralize');
+const generateReactAdmin = require('./generateReactAdmin');
 
 const prompts = [
   {
@@ -47,7 +48,7 @@ const SCHEMA = {
   string: 'string',
   date: 'time'
 };
-module.exports = function(plop) {
+exports.init = function(plop, config) {
   // controller generator
 
   plop.setHelper('upperCaseFirstChart', txt => upperCaseFirstChart(txt));
@@ -62,7 +63,7 @@ module.exports = function(plop) {
   plop.setGenerator('generate add Express model', {
     description: 'Add new Express model',
     prompts: prompts,
-    actions: customAction
+    actions: customAction(config)
   });
 
   plop.setGenerator(
@@ -83,13 +84,17 @@ module.exports = function(plop) {
         }
       ],
       actions: function(data) {
-        return customAction({ name: data.name, props: JSON.parse(data.props) });
+        return customAction(config)({
+          name: data.name,
+          props: JSON.parse(data.props)
+        });
       }
     }
   );
 };
 
-function customAction(data) {
+const customAction = config => data => {
+  const WEB_PATH = config.WEB_PATH;
   const actions = [
     {
       type: 'add',
@@ -156,9 +161,16 @@ function customAction(data) {
         } should not be empty !").notEmpty();`
       });
   });
-
-  return actions;
-}
+  const reactAdminActions = WEB_PATH
+    ? generateReactAdmin.customAction(
+        {
+          props: data.props.map(item => item.propName)
+        },
+        WEB_PATH
+      )
+    : [];
+  return actions.concat(reactAdminActions);
+};
 
 function generateValidator(element) {
   return `  ${element.propName}: {

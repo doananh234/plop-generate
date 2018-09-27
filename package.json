@@ -1,13 +1,13 @@
 {
   "name": "plopfile-generate",
-  "version": "1.0.22",
+  "version": "1.0.28",
   "description": "",
   "author": {
     "name": "anh",
     "email": "doananh234@gmail.com"
   },
   "engines": {
-    "node": "8.11.3"
+    "node": ">8"
   },
   "main": "app",
   "scripts": {},

@@ -5,8 +5,8 @@ import EditButton from '../../../components/RestActions/EditButton';
 import DeleteButton from '../../../components/RestActions/DeleteButton';
 import RestList from '../../rest/List';
 
-const List{{upperCaseFirstChart name}} = props => (
-  <RestList {...props} hasCreate resource="{{name}}">
+const List{{upperCaseFirstChartWithPluralize name}} = props => (
+  <RestList {...props} hasCreate resource="{{pluralize name}}">
     //content here
     <ActionGroup>
       <EditButton />
@@ -15,4 +15,4 @@ const List{{upperCaseFirstChart name}} = props => (
   </RestList>
 );
 
-export default List{{upperCaseFirstChart name}};
+export default List{{upperCaseFirstChartWithPluralize name}};

@@ -71,57 +71,60 @@ const configInit = {
   ]
 };
 
-const configGenerate = [
-  {
-    type: 'addMany',
-    skipIfExists: true,
-    templateFiles: [
-      __dirname + '/../templates/react-admin/appendTemp/Model/**/*.js'
-    ],
-    destination: './src/containers/{{upperCaseFirstChart name}}/',
-    base: __dirname + '/../templates/react-admin/appendTemp/Model/'
-  },
-  {
-    type: 'append',
-    path: './src/routes/PrivateRoute/index.js',
-    pattern: /(const)( )(restRoutes)( )(=)( )(\[)/i,
-    template: `
+const configGenerate = (rootPath = '.') => {
+  return [
     {
-      path: '/{{name}}',
+      type: 'addMany',
+      skipIfExists: true,
+      templateFiles: [
+        __dirname + '/../templates/react-admin/appendTemp/Model/**/*.js'
+      ],
+      destination:
+        rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/',
+      base: __dirname + '/../templates/react-admin/appendTemp/Model/'
+    },
+    {
+      type: 'append',
+      path: rootPath + '/src/routes/PrivateRoute/index.js',
+      pattern: /(const)( )(restRoutes)( )(=)( )(\[)/i,
+      template: `
+    {
+      path: '/{{pluralize name}}',
       component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChart name}}/List'),
+        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/List'),
         loading: Loading,
       }),
     },`
-  },
-  {
-    type: 'append',
-    path: './src/routes/PrivateRoute/index.js',
-    pattern: /(const)( )(modalRoutes)( )(=)( )(\[)/i,
-    template: `
+    },
     {
-      path: '/{{name}}/create',
+      type: 'append',
+      path: rootPath + '/src/routes/PrivateRoute/index.js',
+      pattern: /(const)( )(modalRoutes)( )(=)( )(\[)/i,
+      template: `
+    {
+      path: '/{{pluralize name}}/create',
       component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChart name}}/Create'),
+        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Create'),
         loading: Loading,
       }),
     },
     {
-      path: '/{{name}}/:id/edit',
+      path: '/{{pluralize name}}/:id/edit',
       component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChart name}}/Edit'),
+        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Edit'),
         loading: Loading,
       }),
     },
     {
-      path: '/{{name}}/:id/show',
+      path: '/{{pluralize name}}/:id/show',
       component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChart name}}/Show'),
+        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Show'),
         loading: Loading,
       }),
     },`
-  }
-];
+    }
+  ];
+};
 
 const prompts = [
   {
@@ -145,12 +148,15 @@ function pluralizeStr(txt) {
   return str.substring(0, 1).toLocaleLowerCase() + str.substring(1);
 }
 
-module.exports = function(plop) {
+exports.init = function(plop) {
   // controller generator
   plop.setHelper('upperCaseFirstChart', txt => upperCaseFirstChart(txt));
   plop.setHelper('upperCase', txt => txt.toUpperCase());
   plop.setPartial('myTitlePartial', '{{upperCase name}}');
   plop.setHelper('pluralize', txt => pluralizeStr(txt));
+  plop.setHelper('upperCaseFirstChartWithPluralize', txt =>
+    upperCaseFirstChart(pluralizeStr(txt))
+  );
   plop.setPrompt('recursive', require('../promts/loopPromts'));
 
   plop.setGenerator('generate init react admin', configInit);
@@ -161,8 +167,8 @@ module.exports = function(plop) {
   });
 };
 
-function customAction(data) {
-  const actions = configGenerate;
+function customAction(data, rootPath = '.') {
+  const actions = configGenerate(rootPath);
   let modelForm = '';
   let modelList = '';
   let modelShow = '';
@@ -182,27 +188,37 @@ function customAction(data) {
 
   actions.push({
     type: 'modify',
-    path: 'src/containers/{{upperCaseFirstChart name}}/List/index.js',
+    path:
+      rootPath +
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/List/index.js',
     pattern: '//content here',
     template: modelList
   });
   actions.push({
     type: 'modify',
-    path: 'src/containers/{{upperCaseFirstChart name}}/Edit/index.js',
+    path:
+      rootPath +
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Edit/index.js',
     pattern: '//content here',
     template: modelForm
   });
   actions.push({
     type: 'modify',
-    path: 'src/containers/{{upperCaseFirstChart name}}/Create/index.js',
+    path:
+      rootPath +
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Create/index.js',
     pattern: '//content here',
     template: modelForm
   });
   actions.push({
     type: 'modify',
-    path: 'src/containers/{{upperCaseFirstChart name}}/Show/index.js',
+    path:
+      rootPath +
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Show/index.js',
     pattern: '//content here',
     template: modelShow
   });
   return actions;
 }
+
+exports.customAction = customAction;

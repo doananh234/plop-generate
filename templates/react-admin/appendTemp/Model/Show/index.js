@@ -2,12 +2,12 @@ import React from 'react';
 import RestShow from '../../rest/Show';
 import TextField from '../../../components/RestField/TextField';
 
-const Show{{upperCaseFirstChart name}} = props => {
+const Show{{upperCaseFirstChartWithPluralize name}} = props => {
   return (
-    <RestShow {...props} showModal hasEdit resource="{{name}}">
+    <RestShow {...props} showModal hasEdit resource="{{pluralize name}}">
       //content here
     </RestShow>
   );
 };
 
-export default Show{{upperCaseFirstChart name}};
+export default Show{{upperCaseFirstChartWithPluralize name}};
