@@ -1,10 +1,10 @@
 import React from 'react';
 import RestCreate from '../../rest/Create';
-import RestFormInput from '../../../components/RestInput/RestFormInput';
+import {{upperCaseFirstChartWithPluralize name}}Form from '../components/Form';
 
 const Create{{upperCaseFirstChartWithPluralize name}} = props => (
-  <RestCreate {...props} showModal resource="{{pluralize name}}">
-    //content here
+  <RestCreate {...props} resource="{{pluralize name}}">
+     <{{upperCaseFirstChartWithPluralize name}}Form />
   </RestCreate>
 );
 

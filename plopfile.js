@@ -23,8 +23,8 @@ module.exports = function(plop, config = {}) {
   plop.setHelper('pluralize', txt => pluralize(txt));
   plop.setPrompt('recursive', require('inquirer-recursive'));
 
-  generateKoaModel(plop, config);
   generateReactAdmin.init(plop, config);
   generateExpressModel.init(plop, config);
+  generateKoaModel(plop, config);
   plop.setGenerator('generate redux', generateRedux);
 };

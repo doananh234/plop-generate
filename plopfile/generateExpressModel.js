@@ -162,12 +162,9 @@ const customAction = config => data => {
       });
   });
   const reactAdminActions = WEB_PATH
-    ? generateReactAdmin.customAction(
-        {
-          props: data.props.map(item => item.propName)
-        },
-        WEB_PATH
-      )
+    ? generateReactAdmin.customAction(WEB_PATH)({
+        props: data.props.map(item => item.propName)
+      })
     : [];
   return actions.concat(reactAdminActions);
 };

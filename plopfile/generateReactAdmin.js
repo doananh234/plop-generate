@@ -88,40 +88,27 @@ const configGenerate = (rootPath = '.') => {
       path: rootPath + '/src/routes/PrivateRoute/index.js',
       pattern: /(const)( )(restRoutes)( )(=)( )(\[)/i,
       template: `
-    {
-      path: '/{{pluralize name}}',
-      component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/List'),
-        loading: Loading,
-      }),
-    },`
+  {
+    path: '/{{pluralize name}}',
+    component: Loadable({
+      loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/List'),
+      loading: Loading,
+    }),
+  },`
     },
     {
       type: 'append',
-      path: rootPath + '/src/routes/PrivateRoute/index.js',
+      path: rootPath + '/src/routes/ModalRoute/index.js',
       pattern: /(const)( )(modalRoutes)( )(=)( )(\[)/i,
       template: `
-    {
-      path: '/{{pluralize name}}/create',
-      component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Create'),
-        loading: Loading,
-      }),
-    },
-    {
-      path: '/{{pluralize name}}/:id/edit',
-      component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Edit'),
-        loading: Loading,
-      }),
-    },
-    {
-      path: '/{{pluralize name}}/:id/show',
-      component: Loadable({
-        loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Show'),
-        loading: Loading,
-      }),
-    },`
+  {
+    path: '/{{pluralize name}}/create',
+    component: lazy(() => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Create')),
+  },
+  {
+    path: '/{{pluralize name}}',
+    component: lazy(() => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/Edit')),
+  },`
     }
   ];
 };
@@ -133,7 +120,7 @@ const prompts = [
     message: 'Model name: '
   },
   {
-    type: 'recursive',
+    type: 'recursiveLoop',
     name: 'props',
     message: 'What is property Name?'
   }
@@ -157,26 +144,29 @@ exports.init = function(plop) {
   plop.setHelper('upperCaseFirstChartWithPluralize', txt =>
     upperCaseFirstChart(pluralizeStr(txt))
   );
-  plop.setPrompt('recursive', require('../promts/loopPromts'));
+  plop.setPrompt('recursiveLoop', require('../promts/loopPromts'));
 
-  plop.setGenerator('generate init react admin', configInit);
   plop.setGenerator('generate react admin view', {
     description: 'Add new Anh.Doan admin =>>>',
     prompts: prompts,
-    actions: customAction
+    actions: customAction()
   });
+  // plop.setGenerator('generate init react admin', configInit);
 };
 
-function customAction(data, rootPath = '.') {
+const customAction = (rootPath = '.') => data => {
   const actions = configGenerate(rootPath);
   let modelForm = '';
   let modelList = '';
   let modelShow = '';
+  let modelFilter = '';
   data.props.forEach((element, index) => {
     //add validator
-
+    modelFilter +=
+      (index !== 0 ? '\n      ' : '') +
+      `<ColLayout elementProps={elementPropsCol}><RestFormInput source="${element}" title="${element}" /></ColLayout>`;
     modelForm +=
-      (index !== 0 ? '\n    ' : '') +
+      (index !== 0 ? '\n      ' : '') +
       `<RestFormInput source="${element}" title="${element}" />`;
     modelList +=
       (index !== 0 ? '\n    ' : '') +
@@ -198,17 +188,18 @@ function customAction(data, rootPath = '.') {
     type: 'modify',
     path:
       rootPath +
-      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Edit/index.js',
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/components/Form.js',
     pattern: '//content here',
     template: modelForm
   });
+
   actions.push({
     type: 'modify',
     path:
       rootPath +
-      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Create/index.js',
+      '/src/containers/{{upperCaseFirstChartWithPluralize name}}/components/Filter.js',
     pattern: '//content here',
-    template: modelForm
+    template: modelFilter
   });
   actions.push({
     type: 'modify',
@@ -219,6 +210,6 @@ function customAction(data, rootPath = '.') {
     template: modelShow
   });
   return actions;
-}
+};
 
 exports.customAction = customAction;

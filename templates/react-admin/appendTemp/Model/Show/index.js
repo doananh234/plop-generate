@@ -4,7 +4,7 @@ import TextField from '../../../components/RestField/TextField';
 
 const Show{{upperCaseFirstChartWithPluralize name}} = props => {
   return (
-    <RestShow {...props} showModal hasEdit resource="{{pluralize name}}">
+    <RestShow {...props} hasEdit resource="{{pluralize name}}">
       //content here
     </RestShow>
   );

@@ -34,6 +34,7 @@ Prompt.prototype.askForLoop = function() {
     })
     .then(
       function(result) {
+        console.log('result.answer', result.answer);
         if (result.answer !== '') {
           this.responses.push(result.answer);
           this.askForLoop();
