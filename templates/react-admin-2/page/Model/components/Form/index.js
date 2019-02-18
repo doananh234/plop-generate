@@ -1,12 +1,11 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import RestInputItem from '../../../../components/RestInput/RestInputItem';
 
 const {{upperCaseFirstChartWithPluralize name}}Form = props => {
   return (
-    <RestRow {...props}>
+    <div {...props}>
       //content here
-    </RestRow>
+    </div>
   );
 };
 

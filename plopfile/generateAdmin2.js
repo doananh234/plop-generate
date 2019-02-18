@@ -185,7 +185,7 @@ export default function* root() {`
       type: 'append',
       path: rootPath + '/src/redux/crudActions.js',
       pattern: `// actions here`,
-      template: '    {{pluralize name}}'
+      template: '    {{pluralize name}},'
     }
   ];
 };
