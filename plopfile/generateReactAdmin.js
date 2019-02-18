@@ -90,10 +90,7 @@ const configGenerate = (rootPath = '.') => {
       template: `
   {
     path: '/{{pluralize name}}',
-    component: Loadable({
-      loader: () => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/List'),
-      loading: Loading,
-    }),
+    component: lazy(() => import('../../containers/{{upperCaseFirstChartWithPluralize name}}/List')),
   },`
     },
     {
@@ -164,7 +161,7 @@ const customAction = (rootPath = '.') => data => {
     //add validator
     modelFilter +=
       (index !== 0 ? '\n      ' : '') +
-      `<ColLayout elementProps={elementPropsCol}><RestFormInput source="${element}" title="${element}" /></ColLayout>`;
+      `<ColLayout elementProps={elementPropsCol}><RestFormInput source="${element}" placeholder="${element}" /></ColLayout>`;
     modelForm +=
       (index !== 0 ? '\n      ' : '') +
       `<RestFormInput source="${element}" title="${element}" />`;

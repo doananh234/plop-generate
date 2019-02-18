@@ -1,8 +1,6 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-import RestFormInput from '../../../components/RestInput/RestFormInput';
-import RestRow from '../../../components/RestLayout/RowLayout';
-// import ColLayout from '../../../components/RestLayout/ColLayout';
+import { Row, Col } from 'antd';
+import RestInputItem from '../../../../components/RestInput/RestInputItem';
 
 const {{upperCaseFirstChartWithPluralize name}}Form = props => {
   return (

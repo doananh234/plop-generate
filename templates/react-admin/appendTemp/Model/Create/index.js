@@ -4,7 +4,7 @@ import {{upperCaseFirstChartWithPluralize name}}Form from '../components/Form';
 
 const Create{{upperCaseFirstChartWithPluralize name}} = props => (
   <RestCreate {...props} resource="{{pluralize name}}">
-     <{{upperCaseFirstChartWithPluralize name}}Form />
+    <{{upperCaseFirstChartWithPluralize name}}Form />
   </RestCreate>
 );
 
