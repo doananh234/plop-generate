@@ -185,7 +185,7 @@ export default function* root() {`
       type: 'append',
       path: rootPath + '/src/redux/crudActions.js',
       pattern: `// actions here`,
-      template: '    {{pluralize name}},'
+      template: '  {{pluralize name}},'
     }
   ];
 };
@@ -238,14 +238,14 @@ const customAction = (rootPath = '.') => data => {
   data.props.forEach((element, index) => {
     //add validator
     modelFilter +=
-      (index !== 0 ? '\n      ' : '') +
+      (index !== 0 ? '\n    ' : '') +
       `<RestInputItem source="${element}" placeholder="${element}" />`;
     modelForm +=
-      (index !== 0 ? '\n      ' : '') + `<RestInputItem source="${element}" title="${element}" />`;
+      (index !== 0 ? '\n    ' : '') + `<RestInputItem source="${element}" title="${element}" />`;
     modelList +=
       (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" title="${element}" />`;
     modelShow +=
-      (index !== 0 ? '\n      ' : '') + `<RestFieldItem source="${element}" title="${element}" />`;
+      (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" title="${element}" />`;
   });
 
   actions.push({
