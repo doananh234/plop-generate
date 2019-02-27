@@ -115,7 +115,7 @@ export default function* root() {`
     {
       type: 'append',
       path: rootPath + '/src/routes/PrivateRoutes/index.js',
-      pattern: `import NotFoundPage from '../../containers/404Page';`,
+      pattern: `import PrivateLayout from '../../layout/PrivateLayout';`,
       template:
         "import {{upperCaseFirstChartWithPluralize name}} from '../../pages/{{upperCaseFirstChartWithPluralize name}}';"
     },
