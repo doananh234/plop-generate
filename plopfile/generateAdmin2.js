@@ -239,13 +239,13 @@ const customAction = (rootPath = '.') => data => {
     //add validator
     modelFilter +=
       (index !== 0 ? '\n    ' : '') +
-      `<RestInputItem source="${element}" placeholder="${element}" />`;
+      `<RestInputItem source="${element}" placeholder="{{pluralize name}}.${element}" />`;
     modelForm +=
-      (index !== 0 ? '\n    ' : '') + `<RestInputItem source="${element}" title="${element}" />`;
+      (index !== 0 ? '\n    ' : '') + `<RestInputItem source="${element}" header="{{pluralize name}}.${element}" />`;
     modelList +=
-      (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" title="${element}" />`;
+      (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" header="{{pluralize name}}.${element}" />`;
     modelShow +=
-      (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" title="${element}" />`;
+      (index !== 0 ? '\n    ' : '') + `<RestFieldItem source="${element}" header="{{pluralize name}}.${element}" />`;
   });
 
   actions.push({
