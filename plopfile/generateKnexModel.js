@@ -85,9 +85,15 @@ module.exports = function(plop) {
 };
 
 function customAction(data) {
+  
+function makeSnakeCase(text) {
+  var result = text.replace(/([A-Z])/g, "_$1");  
+  var finalResult = result.toLowerCase();  
+  return finalResult;
+}
 
   function migrationsName (txt) {
-    return moment().format('YYYYMMDDHHMMSS_')+txt+'.js';  
+    return moment().format('YYYYMMDDHHmmSS_')+makeSnakeCase(txt)+'.js';  
   }
 
   const migrationsFile = 'app/db/migrations/'+ migrationsName(data.name);

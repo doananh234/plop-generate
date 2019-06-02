@@ -5,7 +5,7 @@ const CustomModel = require('./CustomModel');
 
 class {{upperCaseFirstChart name}} extends CustomModel {
   static get tableName() {
-    return '{{name}}';
+    return '{{snakeCase name}}';
   }
 }
 

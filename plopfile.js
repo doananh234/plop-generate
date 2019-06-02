@@ -22,8 +22,16 @@ function pluralizeStr(txt) {
   const str = pluralize(txt);
   return str.substring(0, 1).toLocaleLowerCase() + str.substring(1);
 }
+
+function makeSnakeCase(text) {
+  var result = text.replace(/([A-Z])/g, "_$1");  
+  var finalResult = result.toLowerCase();  
+  return finalResult;
+}
+
 module.exports = function(plop, config = {}) {
   // controller generator
+  plop.setHelper('snakeCase', txt => makeSnakeCase(txt));
   plop.setHelper('upperCaseFirstChart', txt => upperCaseFirstChart(txt));
   plop.setHelper('upperCase', txt => txt.toUpperCase());
   plop.setPartial('myTitlePartial', '{{upperCase name}}');
