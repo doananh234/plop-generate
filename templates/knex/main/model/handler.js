@@ -12,7 +12,7 @@ exports.getMany = {
   handler: controller.getMany.bind(controller),
   auth: {
     strategy: 'jwt',
-    scope: ['admin', 'user']
+    // scope: ['admin', 'user']
   },
   validate: {
     headers: validator.checkToken,
@@ -27,7 +27,7 @@ exports.count = {
   handler: controller.count.bind(controller),
   auth: {
     strategy: 'jwt',
-    scope: ['admin', 'user']
+    // scope: ['admin', 'user']
   },
   validate: {
     headers: validator.checkToken
@@ -42,7 +42,7 @@ exports.getOne = {
   auth: 'jwt',
   auth: {
     strategy: 'jwt',
-    scope: ['admin']
+    // scope: ['admin']
   },
   validate: {
     headers: validator.checkToken,
@@ -59,11 +59,11 @@ exports.createOne = {
   handler: controller.createOne.bind(controller),
   auth: {
     strategy: 'jwt',
-    scope: ['admin']
+    // scope: ['admin']
   },
   validate: {
     headers: validator.checkToken,
-    payload: validator.createTag
+    payload: validator.create{{upperCaseFirstChart name}}
   }
 };
 
@@ -74,14 +74,14 @@ exports.updateOne = {
   handler: controller.updateOne.bind(controller),
   auth: {
     strategy: 'jwt',
-    scope: ['admin']
+    // scope: ['admin']
   },
   validate: {
     headers: validator.checkToken,
     params: {
       id: validator.idParam
     },
-    payload: validator.updateTag
+    payload: validator.update{{upperCaseFirstChart name}}
   }
 };
 

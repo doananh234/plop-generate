@@ -46,7 +46,7 @@ const SCHEMA = {
   object: 'jsonb',
   array: 'jsonb',
   string: 'string',
-  date: 'time'
+  date: 'timestamp'
 };
 module.exports = function(plop) {
   // controller generator
@@ -155,6 +155,15 @@ function makeSnakeCase(text) {
           : generateValidator(data.props[index - 1]),
       template: generateValidator(element)
     });
+    actions.push({
+      type: 'append',
+      path: 'app/main/{{name}}/validator.js',
+      pattern:
+        index === 0
+          ? 'exports.update' + upperCaseFirstChart(data.name) + ' = {'
+          : generateValidator(data.props[index - 1]),
+      template: generateValidator(element)
+    });
     //add schema
     actions.push({
       type: 'append',
@@ -166,13 +175,13 @@ function makeSnakeCase(text) {
             SCHEMA[data.props[index - 1].type] +
             "('" +
             data.props[index - 1].propName +
-            "').notNullable();",
+            "');",
       template:
         '      table.' +
         SCHEMA[element.type] +
         "('" +
         element.propName +
-        "').notNullable();"
+        "');"
     });
   });
 

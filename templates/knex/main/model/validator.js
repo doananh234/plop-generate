@@ -7,7 +7,7 @@ exports.queryParams = queryParams;
 
 exports.checkToken = checkToken;
 
-exports.idParam = Joi.number()
+exports.idParam = Joi.string()
   .required()
   .description('id is required');
 

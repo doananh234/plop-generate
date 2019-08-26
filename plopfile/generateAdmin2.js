@@ -1,3 +1,4 @@
+const pluralize = require('pluralize');
 const configInit = {
   description: 'generate init React Admin',
   prompts: [],
