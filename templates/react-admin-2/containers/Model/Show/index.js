@@ -1,5 +1,5 @@
 import React from 'react';
-import RestShow from '../../../containers/rest/Show';
+import RestShow from '../../rest/Show';
 import RestFieldItem from '../../../components/RestField/RestFieldItem';
 
 const {{upperCaseFirstChartWithPluralize name}}Show = props => (

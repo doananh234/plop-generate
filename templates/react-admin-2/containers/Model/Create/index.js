@@ -1,5 +1,5 @@
 import React from 'react';
-import Create from '../../../containers/rest/Create';
+import Create from '../../rest/Create';
 import Form from '../components/Form';
 
 const {{upperCaseFirstChartWithPluralize name}}Create = props => (

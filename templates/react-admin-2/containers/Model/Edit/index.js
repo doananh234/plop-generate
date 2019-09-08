@@ -1,5 +1,5 @@
 import React from 'react';
-import Edit from '../../../containers/rest/Edit';
+import Edit from '../../rest/Edit';
 import Form from '../components/Form';
 
 const {{upperCaseFirstChartWithPluralize name}}Edit = props => (
