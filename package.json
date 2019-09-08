@@ -1,6 +1,6 @@
 {
   "name": "plopfile-generate",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "description": "",
   "author": {
     "name": "anh",
@@ -12,11 +12,10 @@
   "main": "app",
   "scripts": {},
   "dependencies": {
-    "inquirer": "1.1.2",
     "inquirer-recursive": "^0.0.5",
     "lodash": "^4.17.10",
     "moment": "^2.24.0",
-    "plop": "^2.0.0",
+    "plop": "^2.4.0",
     "pluralize": "^7.0.0",
     "util": "^0.11.0"
   }

@@ -109,9 +109,16 @@ export default function* root() {`
     {
       type: 'addMany',
       skipIfExists: true,
-      templateFiles: [__dirname + '/../templates/react-admin-2/page/Model/**/*.js'],
+      templateFiles: [__dirname + '/../templates/react-admin-2/containers/Model/**/*.js'],
+      destination: rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/',
+      base: __dirname + '/../templates/react-admin-2/containers/Model/'
+    },
+    {
+      type: 'addMany',
+      skipIfExists: true,
+      templateFiles: [__dirname + '/../templates/react-admin-2/pages/Model/**/*.js'],
       destination: rootPath + '/src/pages/{{upperCaseFirstChartWithPluralize name}}/',
-      base: __dirname + '/../templates/react-admin-2/page/Model/'
+      base: __dirname + '/../templates/react-admin-2/pages/Model/'
     },
     {
       type: 'append',
@@ -251,14 +258,14 @@ const customAction = (rootPath = '.') => data => {
 
   actions.push({
     type: 'modify',
-    path: rootPath + '/src/pages/{{upperCaseFirstChartWithPluralize name}}/List/index.js',
+    path: rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/List/index.js',
     pattern: '//content here',
     template: modelList
   });
   actions.push({
     type: 'modify',
     path:
-      rootPath + '/src/pages/{{upperCaseFirstChartWithPluralize name}}/components/Form/index.js',
+      rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/components/Form/index.js',
     pattern: '//content here',
     template: modelForm
   });
@@ -266,13 +273,13 @@ const customAction = (rootPath = '.') => data => {
   actions.push({
     type: 'modify',
     path:
-      rootPath + '/src/pages/{{upperCaseFirstChartWithPluralize name}}/components/Filter/index.js',
+      rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/components/Filter/index.js',
     pattern: '//content here',
     template: modelFilter
   });
   actions.push({
     type: 'modify',
-    path: rootPath + '/src/pages/{{upperCaseFirstChartWithPluralize name}}/Show/index.js',
+    path: rootPath + '/src/containers/{{upperCaseFirstChartWithPluralize name}}/Show/index.js',
     pattern: '//content here',
     template: modelShow
   });
