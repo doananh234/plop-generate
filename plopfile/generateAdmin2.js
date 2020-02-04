@@ -77,14 +77,14 @@ const configGenerate = (rootPath = '.') => {
     },
     {
       type: 'append',
-      path: rootPath + '/src/redux/reducers.js',
+      path: rootPath + '/src/redux/slice.js',
       // pattern: /(export)( )(default)( )(\{)/i,
       pattern: `// import here`,
-      template: "import {{pluralize name}} from './{{pluralize name}}/reducer';"
+      template: "import {{pluralize name}} from './{{pluralize name}}/slice';"
     },
     {
       type: 'append',
-      path: rootPath + '/src/redux/reducers.js',
+      path: rootPath + '/src/redux/slice.js',
       // pattern: /(export)( )(default)( )(\{)/i,
       pattern: `// add reducer here`,
       template: '    {{pluralize name}},'
@@ -187,7 +187,7 @@ export default function* root() {`
       type: 'append',
       path: rootPath + '/src/redux/crudActions.js',
       pattern: `// import crud action`,
-      template: "import {{pluralize name}} from './{{pluralize name}}/actions';"
+      template: "import { actions as {{pluralize name}} } from './{{pluralize name}}/slice';"
     },
     {
       type: 'append',
