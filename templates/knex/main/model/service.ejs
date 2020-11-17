@@ -1,0 +1,10 @@
+import Models from '../../../db/models';
+import BaseServiceCRUD from '../../../base/BaseServiceCRUD';
+
+class {{upperCaseFirstChart name}}Service extends BaseServiceCRUD {
+  constructor() {
+    super(Models.{{upperCaseFirstChart name}}, '{{upperCaseFirstChart name}}');
+  }
+}
+
+export default {{upperCaseFirstChart name}}Service;

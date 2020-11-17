@@ -1,0 +1,18 @@
+import Joi from '@hapi/joi';
+import { queryParams as queryParamsValidator, checkToken as checkTokenValidator } from '../../../utils/validatorUtils';
+
+export const queryParams = queryParamsValidator;
+
+export const checkToken = checkTokenValidator;
+
+export const idParam = Joi.string()
+  .required()
+  .description('id is required');
+
+export const create{{upperCaseFirstChart name}} = {
+  // add validate params here
+};
+
+export const update{{upperCaseFirstChart name}} = {
+  // add validate params here
+};

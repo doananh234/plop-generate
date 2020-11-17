@@ -1,0 +1,10 @@
+import BaseControllerCRUD from '../../../base/BaseControllerCRUD';
+import {{upperCaseFirstChart name}}Service from './service';
+
+class {{upperCaseFirstChart name}}Controller extends BaseControllerCRUD {
+  constructor() {
+    super(new {{upperCaseFirstChart name}}Service());
+  }
+}
+
+export default {{upperCaseFirstChart name}}Controller;

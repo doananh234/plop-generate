@@ -1,5 +1,5 @@
 import React from 'react';
-import RestInputItem from '../../../../components/RestInput/RestInputItem';
+import RestInputItem from 'components/RestInput/RestInputItem';
 
 const {{upperCaseFirstChartWithPluralize name}}Form = props => (
   <div {...props}>

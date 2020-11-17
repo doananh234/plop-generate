@@ -1,7 +1,5 @@
-'use strict';
+import knex from '../connection';
 
-const knex = require('../connection');
-
-module.exports = {
+export default {
   knex,
 };

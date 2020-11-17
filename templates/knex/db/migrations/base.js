@@ -1,6 +1,4 @@
-'use strict';
-
-exports.up = function (knex, Promise) {
+exports.up = function (knex) {
   return knex.raw('create extension if not exists "uuid-ossp"').then(() => {
     return knex.schema.createTable('{{snakeCase name}}', (table) => {
       table.uuid('id').defaultTo(knex.raw('uuid_generate_v4()'));
@@ -10,6 +8,6 @@ exports.up = function (knex, Promise) {
   });
 };
 
-exports.down = function (knex, Promise) {
+exports.down = function (knex) {
   return knex.schema.raw('DROP TABLE {{snakeCase name}} CASCADE');
 };

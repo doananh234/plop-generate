@@ -1,9 +1,6 @@
-'use strict';
+import BaseModel from './BaseModel';
 
-const path = require('path');
-const CustomModel = require('./CustomModel');
-
-class {{upperCaseFirstChart name}} extends CustomModel {
+class {{upperCaseFirstChart name}} extends BaseModel {
   static get tableName() {
     return '{{snakeCase name}}';
   }
@@ -16,6 +13,21 @@ class {{upperCaseFirstChart name}} extends CustomModel {
   $beforeUpdate() {
     this.updatedAt = new Date().toISOString();
   }
+
+  // static get relationMappings() {
+  //   return {
+
+  //   };
+  // }
+
+  // static get arrayRelationMappings() {
+  //   return {
+  //     products: {
+  //       key: 'dataId',
+  //       as: 'renameData',
+  //       relatedModel: 'modelName',
+  //     },
+  // }
 }
 
-module.exports = {{upperCaseFirstChart name}};
+export default {{upperCaseFirstChart name}};

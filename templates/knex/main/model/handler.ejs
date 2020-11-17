@@ -1,11 +1,9 @@
-'use strict';
-
-const {{upperCaseFirstChart name}}Controller = require('./controller');
-const validator = require('./validator');
+import {{upperCaseFirstChart name}}Controller from './controller';
+import { queryParams, idParam, checkToken, update{{upperCaseFirstChart name}}, create{{upperCaseFirstChart name}} } from './validator';
 
 const controller = new {{upperCaseFirstChart name}}Controller();
 
-exports.getMany = {
+export const getMany = {
   description: 'Get {{upperCaseFirstChart name}} list',
   notes: 'Return {{upperCaseFirstChart name}} items',
   tags: ['api', 'v1'],
@@ -15,12 +13,12 @@ exports.getMany = {
     // scope: ['admin', 'user']
   },
   validate: {
-    headers: validator.checkToken,
-    query: validator.queryParams
+    headers: checkToken,
+    query: queryParams
   }
 };
 
-exports.count = {
+export const count = {
   description: 'Count {{upperCaseFirstChart name}} list',
   notes: 'Return a count result of {{upperCaseFirstChart name}} items',
   tags: ['api', 'v1'],
@@ -30,11 +28,11 @@ exports.count = {
     // scope: ['admin', 'user']
   },
   validate: {
-    headers: validator.checkToken
+    headers: checkToken
   }
 };
 
-exports.getOne = {
+export const getOne = {
   description: 'Get a {{upperCaseFirstChart name}}',
   notes: 'Return a {{upperCaseFirstChart name}} by id',
   tags: ['api', 'v1'],
@@ -45,14 +43,14 @@ exports.getOne = {
     // scope: ['admin']
   },
   validate: {
-    headers: validator.checkToken,
+    headers: checkToken,
     params: {
-      id: validator.idParam
+      id: idParam
     }
   }
 };
 
-exports.createOne = {
+export const createOne = {
   description: 'Create a new {{upperCaseFirstChart name}}',
   notes: 'Return created {{upperCaseFirstChart name}}',
   tags: ['api', 'v1'],
@@ -62,12 +60,12 @@ exports.createOne = {
     // scope: ['admin']
   },
   validate: {
-    headers: validator.checkToken,
-    payload: validator.create{{upperCaseFirstChart name}}
+    headers: checkToken,
+    payload: create{{upperCaseFirstChart name}}
   }
 };
 
-exports.updateOne = {
+export const updateOne = {
   description: 'Update {{upperCaseFirstChart name}}',
   notes: 'Return updated {{upperCaseFirstChart name}} by id',
   tags: ['api', 'v1'],
@@ -77,15 +75,15 @@ exports.updateOne = {
     // scope: ['admin']
   },
   validate: {
-    headers: validator.checkToken,
+    headers: checkToken,
     params: {
-      id: validator.idParam
+      id: idParam
     },
-    payload: validator.update{{upperCaseFirstChart name}}
+    payload: update{{upperCaseFirstChart name}}
   }
 };
 
-exports.deleteOne = {
+export const deleteOne = {
   description: 'Delete a {{upperCaseFirstChart name}}',
   notes: 'Return deleted {{upperCaseFirstChart name}} by id',
   tags: ['api', 'v1'],
@@ -95,9 +93,9 @@ exports.deleteOne = {
     scope: ['admin']
   },
   validate: {
-    headers: validator.checkToken,
+    headers: checkToken,
     params: {
-      id: validator.idParam
+      id: idParam
     }
   }
 };

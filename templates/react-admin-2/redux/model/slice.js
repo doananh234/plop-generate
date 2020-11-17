@@ -1,8 +1,6 @@
-import { makeCRUDSlice } from '../crudCreator/slice';
+import { makeCRUDSlice } from 'redux/crudCreator';
+import { MODEL_NAME, {{pluralize name}}Actions } from './actions';
 
-export const RESOURCE = '{{pluralize name}}';
-const {{pluralize name}}Slice = makeCRUDSlice(RESOURCE);
+const slice = makeCRUDSlice(MODEL_NAME, {{pluralize name}}Actions);
 
-export const { actions, reducer } = {{pluralize name}}Slice;
-
-export default reducer;
+export default slice.reducer;

@@ -1,0 +1,43 @@
+import {
+  getMany,
+  deleteOne,
+  getOne,
+  count,
+  updateOne,
+  createOne,
+} from './handler';
+
+const Routes = [
+  {
+    method: 'GET',
+    path: '/api/v1/admin/{{pluralize name}}',
+    config: getMany,
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/admin/{{pluralize name}}/{id}',
+    config: getOne,
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/admin/{{pluralize name}}/count',
+    config: count,
+  },
+  {
+    method: 'POST',
+    path: '/api/v1/admin/{{pluralize name}}',
+    config: createOne,
+  },
+  {
+    method: 'PUT',
+    path: '/api/v1/admin/{{pluralize name}}/{id}',
+    config: updateOne,
+  },
+  {
+    method: 'DELETE',
+    path: '/api/v1/admin/{{pluralize name}}/{id}',
+    config: deleteOne,
+  },
+];
+
+export default Routes;

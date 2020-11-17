@@ -1,0 +1,25 @@
+import {
+  getMany,
+  getOne,
+  count,
+} from './handler';
+
+const Routes = [
+  {
+    method: 'GET',
+    path: '/api/v1/client/{{pluralize name}}',
+    config: getMany,
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/client/{{pluralize name}}/{id}',
+    config: getOne,
+  },
+  {
+    method: 'GET',
+    path: '/api/v1/client/{{pluralize name}}/count',
+    config: count,
+  },
+];
+
+export default Routes;

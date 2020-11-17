@@ -98,13 +98,75 @@ function makeSnakeCase(text) {
 
   const migrationsFile = 'app/db/migrations/'+ migrationsName(data.name);
   const actions = [
+    // {
+    //   type: 'addMany',
+    //   skipIfExists: true,
+    //   templateFiles: [__dirname + '/../templates/knex/main/model/*.js'],
+    //   destination: 'app/main/{{name}}/',
+    //   base: __dirname + '/../templates/knex/main/model'
+    // },
     {
-      type: 'addMany',
+      type: 'add',
       skipIfExists: true,
-      templateFiles: [__dirname + '/../templates/knex/main/model/*.js'],
-      destination: 'app/main/{{name}}/',
-      base: __dirname + '/../templates/knex/main/model'
+      path: 'app/main/admin/{{name}}/controller.js',
+      templateFile:__dirname + '/../templates/knex/main/model/controller.ejs',
     },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/admin/{{name}}/handler.js',
+      templateFile:__dirname + '/../templates/knex/main/model/handler.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/admin/{{name}}/routers.js',
+      templateFile:__dirname + '/../templates/knex/main/model/routers.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/admin/{{name}}/service.js',
+      templateFile:__dirname + '/../templates/knex/main/model/service.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/admin/{{name}}/validator.js',
+      templateFile:__dirname + '/../templates/knex/main/model/validator.ejs',
+    },
+
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/client/{{name}}/controller.js',
+      templateFile:__dirname + '/../templates/knex/main/model/controller.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/client/{{name}}/handler.js',
+      templateFile:__dirname + '/../templates/knex/main/model/handlerClient.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/client/{{name}}/routers.js',
+      templateFile:__dirname + '/../templates/knex/main/model/routersClient.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/client/{{name}}/service.js',
+      templateFile:__dirname + '/../templates/knex/main/model/service.ejs',
+    },
+    {
+      type: 'add',
+      skipIfExists: true,
+      path: 'app/main/client/{{name}}/validator.js',
+      templateFile:__dirname + '/../templates/knex/main/model/validator.ejs',
+    },
+    
     {
       type: 'add',
       skipIfExists: true,
@@ -126,14 +188,14 @@ function makeSnakeCase(text) {
     {
       type: 'append',
       path: 'app/db/models/index.js',
-      pattern: "const knex = require('../connection');",
+      pattern: "import knex from '../connection';",
       template:
-        "\nconst {{upperCaseFirstChart name}} = require('./{{upperCaseFirstChart name}}');"
+        "\nimport {{upperCaseFirstChart name}} from './{{upperCaseFirstChart name}}';"
     },
     {
       type: 'append',
       path: 'app/db/models/index.js',
-      pattern: 'module.exports = {',
+      pattern: 'knex,',
       template: '  {{upperCaseFirstChart name}},'
     },
     // {
@@ -148,22 +210,30 @@ function makeSnakeCase(text) {
     //add validator
     actions.push({
       type: 'append',
-      path: 'app/main/{{name}}/validator.js',
-      pattern:
-        index === 0
-          ? 'exports.create' + upperCaseFirstChart(data.name) + ' = {'
-          : generateValidator(data.props[index - 1]),
+      path: 'app/main/admin/{{name}}/validator.js',
+      pattern:'export const create' + upperCaseFirstChart(data.name) + ' = {',
       template: generateValidator(element)
     });
     actions.push({
       type: 'append',
-      path: 'app/main/{{name}}/validator.js',
-      pattern:
-        index === 0
-          ? 'exports.update' + upperCaseFirstChart(data.name) + ' = {'
-          : generateValidator(data.props[index - 1]),
+      path: 'app/main/admin/{{name}}/validator.js',
+      pattern:'export const update' + upperCaseFirstChart(data.name) + ' = {',
       template: generateValidator(element)
     });
+
+    actions.push({
+      type: 'append',
+      path: 'app/main/client/{{name}}/validator.js',
+      pattern:'export const create' + upperCaseFirstChart(data.name) + ' = {',
+      template: generateValidator(element)
+    });
+    actions.push({
+      type: 'append',
+      path: 'app/main/client/{{name}}/validator.js',
+      pattern:'export const update' + upperCaseFirstChart(data.name) + ' = {',
+      template: generateValidator(element)
+    });
+
     //add schema
     actions.push({
       type: 'append',
@@ -195,7 +265,6 @@ function generateValidator(element) {
     ':' +
     ' Joi.' +
     getTypeStr(element) +
-    getRequiredStr(element) +
     ','
   );
 }

@@ -1,0 +1,41 @@
+import {{upperCaseFirstChart name}}Controller from './controller';
+import { queryParams, idParam, checkToken } from './validator';
+
+const controller = new {{upperCaseFirstChart name}}Controller();
+
+export const getMany = {
+  description: 'Get {{upperCaseFirstChart name}} list',
+  notes: 'Return {{upperCaseFirstChart name}} items',
+  tags: ['api', 'v1'],
+  handler: controller.getMany.bind(controller),
+  auth: false,
+  validate: {
+    headers: checkToken,
+    query: queryParams
+  }
+};
+
+export const count = {
+  description: 'Count {{upperCaseFirstChart name}} list',
+  notes: 'Return a count result of {{upperCaseFirstChart name}} items',
+  tags: ['api', 'v1'],
+  handler: controller.count.bind(controller),
+  auth: false,
+  validate: {
+    headers: checkToken
+  }
+};
+
+export const getOne = {
+  description: 'Get a {{upperCaseFirstChart name}}',
+  notes: 'Return a {{upperCaseFirstChart name}} by id',
+  tags: ['api', 'v1'],
+  handler: controller.getOne.bind(controller),
+  auth: false,
+  validate: {
+    headers: checkToken,
+    params: {
+      id: idParam
+    }
+  }
+};
